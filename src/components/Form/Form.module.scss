@@ -1,0 +1,78 @@
+@import "../scss/mixins.scss";
+@import "../scss/variables.scss";
+
+.form__content {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+
+  label {
+    color: $very-dark-violet;
+    font-weight: bolder;
+  }
+
+  input {
+    width: 100%;
+    padding: 1em 0;
+    border: 1px solid $gray;
+    border-radius: 5px;
+    margin: 0.7em 0 2em;
+    cursor: pointer;
+
+    &::placeholder {
+      color: $gray;
+      letter-spacing: 1px;
+      font-size: 1.2em;
+      font-family: $font-fam;
+      padding-left: 1em;
+      font-weight: 600;
+    }
+  }
+
+  .footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+
+    .date__expire {
+      .input_container {
+        display: flex;
+        gap: 0.5em;
+      }
+    }
+  }
+
+  button {
+    padding: 1em 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: $very-dark-violet;
+    color: $light-gray;
+    font-weight: $font-fam;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    cursor: pointer;
+
+    &:hover {
+      filter: opacity(0.9);
+    }
+
+    &:focus {
+      filter: opacity(1);
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .form__content {
+    width: 40%;
+  }
+
+  label {
+    letter-spacing: 1px;
+  }
+}
