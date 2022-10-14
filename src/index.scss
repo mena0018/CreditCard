@@ -1,0 +1,63 @@
+@import "./scss/mixins.scss";
+@import "./scss/variables.scss";
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: $font-fam;
+  background-color: $white;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 35% 65%);
+
+  .card__container {
+    background: lightcyan;
+
+    .card__content {
+      width: 100%;
+      height: 80%;
+      background-image: url("./images/bg-main-mobile.png");
+      background-size: cover;
+    }
+  }
+
+  .form__container {
+    width: 100%;
+    height: 100%;
+    background: indianred;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (min-width: $responsive) {
+  .container {
+    grid-template-columns: repeat(2, 35% 65%);
+    grid-template-rows: 1fr;
+
+    .card__container {
+      .card__content {
+        width: 80%;
+        height: 100%;
+        background-image: url("./images/bg-main-desktop.png");
+      }
+    }
+  }
+}
