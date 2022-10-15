@@ -1,5 +1,5 @@
-@import "../scss/mixins.scss";
-@import "../scss/variables.scss";
+@import "../../scss/mixins.scss";
+@import "../../scss/variables.scss";
 
 .form__content {
   width: 85%;
@@ -12,6 +12,7 @@
   label {
     color: $very-dark-violet;
     font-weight: bolder;
+    font-size: 0.9em;
   }
 
   input {
@@ -19,7 +20,7 @@
     padding: 1em 0;
     border: 1px solid $gray;
     border-radius: 5px;
-    margin: 0.7em 0 2em;
+    margin: 0.3em 0 1em;
     cursor: pointer;
 
     &::placeholder {
@@ -67,12 +68,24 @@
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 380px) {
   .form__content {
-    width: 40%;
-  }
+    input {
+      margin: 0.7em 0 2em;
+    }
 
-  label {
-    letter-spacing: 1px;
+    label {
+      font-size: 1em;
+    }
+  }
+}
+
+@media screen and (min-width: $responsive) {
+  .form__content {
+    width: 45%;
+
+    label {
+      letter-spacing: 1px;
+    }
   }
 }
