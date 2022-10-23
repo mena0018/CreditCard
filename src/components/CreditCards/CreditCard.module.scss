@@ -21,14 +21,12 @@
     position: absolute;
     right: 0;
 
-    &::after {
-      content: "000";
-      display: block;
+    p {
       position: absolute;
-      right: 7%;
-      top: 34%;
+      right: 9%;
+      top: 32%;
       transform: translate(-50%, -50%);
-      font-size: 0.8em;
+      font-size: 0.9em;
       font-weight: 700;
       color: $white;
     }
@@ -90,6 +88,7 @@
       font-size: 0.8em;
       color: $light-gray;
       letter-spacing: 1px;
+      text-transform: uppercase;
     }
   }
 }
@@ -114,8 +113,8 @@
     .back_card_container {
       width: 19em;
 
-      &::after {
-        font-size: 0.9em;
+      p {
+        top: 35%;
       }
     }
   }
@@ -153,7 +152,7 @@
       right: -18%;
       font-size: 1.1em;
 
-      &::after {
+      p {
         top: 40%;
       }
     }

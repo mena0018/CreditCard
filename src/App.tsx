@@ -1,7 +1,8 @@
 import CreditCard from "./components/CreditCards/CreditCard";
 import Form from "./components/Form/Form";
-import { useEffect, useRef} from "react";
+import { useEffect, useRef } from 'react';
 import gsap from "gsap";
+import  FormContextProvider  from "./contexts/formContext";
 
 
 const App = () => {
@@ -16,17 +17,19 @@ const App = () => {
   })
 
   return (
-    <div className="container">
-      <div className="card__container">
-        <div className="card__background">
-          <CreditCard />
+    <FormContextProvider>
+      <div className="container">
+        <div className="card__container">
+          <div className="card__background">
+            <CreditCard />
+          </div>
+        </div>
+
+        <div className="form__container" ref={formRef}>
+          <Form />
         </div>
       </div>
-
-      <div className="form__container" ref={formRef}>
-        <Form />
-      </div>
-    </div>
+    </FormContextProvider>
   );
 };
 
