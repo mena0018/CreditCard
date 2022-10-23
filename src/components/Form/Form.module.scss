@@ -9,6 +9,12 @@
   justify-content: center;
   overflow: hidden;
 
+  p {
+    color: $red;
+    font-size: 1em;
+    margin: 0.5em 0
+  }
+
   label {
     color: $very-dark-violet;
     font-weight: bolder;
@@ -17,11 +23,15 @@
 
   input {
     width: 100%;
-    padding: 1em 0;
+    padding: 1em 0.8em;
     border: 1px solid $gray;
     border-radius: 5px;
-    margin: 0.3em 0 1em;
+    margin-top: 0.5em;
     cursor: pointer;
+    font-family: $font-fam;
+    letter-spacing: 1px;
+    color: $very-dark-violet;
+    font-weight: 600;
 
     &::placeholder {
       color: $gray;
@@ -48,6 +58,7 @@
 
   button {
     padding: 1em 0;
+    margin-top: 1em;
     border-radius: 8px;
     border: none;
     outline: none;
@@ -70,8 +81,11 @@
 
 @media screen and (min-width: 380px) {
   .form__content {
-    input {
-      margin: 0.7em 0 2em;
+    justify-content: start;
+    margin-top: 1em;
+
+    p {
+      margin: 0.5em 0 1.5em;
     }
 
     label {
@@ -83,6 +97,8 @@
 @media screen and (min-width: $responsive) {
   .form__content {
     width: 45%;
+    justify-content: center;
+    margin-top: 0;
 
     label {
       letter-spacing: 1px;

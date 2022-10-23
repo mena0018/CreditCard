@@ -1,7 +1,8 @@
 import styles from "./CreditCard.module.scss";
-import { useEffect, useRef} from "react";
+import { useEffect, useRef, useContext } from 'react';
 import gsap from "gsap";
 import useResize from "../../hooks/useResize";
+import { FormContext } from '../../contexts/formContext';
 
 
 const CreditCard = () => {
@@ -10,6 +11,7 @@ const CreditCard = () => {
   const backCardRef = useRef<HTMLDivElement>(null);
 
   const size = useResize();
+  const { formData } = useContext(FormContext);
 
   useEffect(() => {
 
@@ -38,20 +40,21 @@ const CreditCard = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.back_card_container} ref={backCardRef}></div>
+      <div className={styles.back_card_container} ref={backCardRef}>
+        <p>{formData.cvc}</p>
+      </div>
 
       <div className={styles.front_card_container} ref={frontCardRef}>
         <div className={styles.card_header}></div>
 
         <div className={styles.card_middle}>
-          <p>0000</p>
-          <p>0000</p>
-          <p>0000</p>
-          <p>0000</p>
+          {formData.cardNumber.split(" ").map((item: string, index: number) => 
+           <p key={index}>{item}</p> 
+          )}
         </div>
 
         <div className={styles.card_footer}>
-          <p>JANE APPLESEED</p> <p>00/00</p>
+          <p>{formData.name}</p> <p>{formData.month}/{formData.year}</p>
         </div>
       </div>
     </div>
