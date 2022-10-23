@@ -1,6 +1,33 @@
 @import "../../scss/mixins.scss";
 @import "../../scss/variables.scss";
 
+.none {
+  display: none;
+}
+
+.form__submit {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3em;
+  overflow: hidden;
+
+  h1 {
+    font-size: 2em;
+    font-weight: bolder;
+    text-transform: uppercase;
+    color: $very-dark-violet;
+    margin: 0.5em 0;
+  }
+
+  p {
+    font-size: 1.1em;
+    color: $dark-violet;
+  }
+}
+
 .form__content {
   width: 85%;
   height: 100%;
@@ -33,6 +60,10 @@
     color: $very-dark-violet;
     font-weight: 600;
 
+    &:invalid {
+      border: 2px solid $red;
+    }
+
     &::placeholder {
       color: $gray;
       letter-spacing: 1px;
@@ -55,31 +86,36 @@
       }
     }
   }
+}
 
-  button {
-    padding: 1em 0;
-    margin-top: 1em;
-    border-radius: 8px;
-    border: none;
-    outline: none;
-    background: $very-dark-violet;
-    color: $light-gray;
-    font-weight: $font-fam;
-    font-size: 1.2em;
-    letter-spacing: 2px;
-    cursor: pointer;
+button {
+  padding: 1em;
+  margin-top: 2em;
+  border-radius: 8px;
+  width: 100%;
+  border: none;
+  outline: none;
+  background: $very-dark-violet;
+  color: $light-gray;
+  font-weight: $font-fam;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  cursor: pointer;
 
-    &:hover {
-      filter: opacity(0.9);
-    }
+  &:hover {
+    filter: opacity(0.9);
+  }
 
-    &:focus {
-      filter: opacity(1);
-    }
+  &:focus {
+    filter: opacity(1);
   }
 }
 
 @media screen and (min-width: 380px) {
+  .form__submit {
+    margin-top: 1em;
+  }
+
   .form__content {
     justify-content: start;
     margin-top: 1em;
@@ -95,6 +131,16 @@
 }
 
 @media screen and (min-width: $responsive) {
+  .form__submit {
+    justify-content: center;
+    width: 45%;
+    margin-top: 0;
+
+    button {
+      width: 70%;
+    }
+  }
+
   .form__content {
     width: 45%;
     justify-content: center;

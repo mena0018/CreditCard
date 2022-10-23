@@ -13,6 +13,9 @@ const CreditCard = () => {
   const size = useResize();
   const { formData } = useContext(FormContext);
 
+  let cardNumber = formData.cardNumber.replace(/(.{4})(?=.)/g,"$1 ").split(" ")
+                                      .map((item: string, index: number) => <p key={index}>{item}</p>)
+
   useEffect(() => {
 
     if (size > 500) {
@@ -48,9 +51,7 @@ const CreditCard = () => {
         <div className={styles.card_header}></div>
 
         <div className={styles.card_middle}>
-          {formData.cardNumber.split(" ").map((item: string, index: number) => 
-           <p key={index}>{item}</p> 
-          )}
+          {cardNumber}
         </div>
 
         <div className={styles.card_footer}>
