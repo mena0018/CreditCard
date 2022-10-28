@@ -2,7 +2,7 @@ import styles from "./CreditCard.module.scss";
 import { useEffect, useRef, useContext } from 'react';
 import gsap from "gsap";
 import useResize from "../../hooks/useResize";
-import { FormContext } from '../../contexts/formContext';
+import { FormContext } from "../../contexts/FormContext";
 
 
 const CreditCard = () => {
@@ -11,7 +11,7 @@ const CreditCard = () => {
   const backCardRef = useRef<HTMLDivElement>(null);
 
   const size = useResize();
-  const { formData } = useContext(FormContext);
+  const [formData] = useContext(FormContext);
 
   let cardNumber = formData.cardNumber.replace(/(.{4})(?=.)/g,"$1 ").split(" ")
                                       .map((item: string, index: number) => <p key={index}>{item}</p>)

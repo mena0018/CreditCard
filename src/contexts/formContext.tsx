@@ -1,24 +1,17 @@
 import { createContext, useState } from "react";
-import { FormTypes } from "../types/FormTypes";
+import { FormTypes, defaultState } from "../types/FormTypes";
 
 type Props = {
-    children: React.ReactNode
+  children: React.ReactNode
 }
 
-export const FormContext = createContext<any>(null);
+export const FormContext = createContext<any>(defaultState);
 
 const FormContextProvider = ({ children }: Props) => {
-  const [formData, setFormData] = useState<FormTypes>({
-    name: "JANE APPLESEED",
-    cardNumber: "0000000000000000",
-    month: "00",
-    year: "00",
-    cvc: "000",
-  });
-
+  const [formData, setFormData] = useState<FormTypes>(defaultState);
 
   return (
-    <FormContext.Provider value={{ formData, setFormData }}> 
+    <FormContext.Provider value={[ formData, setFormData ]}> 
         {children}
     </FormContext.Provider> 
   );
