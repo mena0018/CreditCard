@@ -1,43 +1,31 @@
 import styles from "./Form.module.scss";
+import { useContext } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormTypes } from "../../types/FormTypes";
-import { useContext, useState } from 'react';
-import { FormContext } from "../../contexts/formContext";
+import { FormContext } from "../../contexts/FormContext";
+import { SubmitFormContext } from '../../contexts/SubmitFormContext';
 import validationIcon from "../../images/icon-complete.svg";
+import useClearData from "../../hooks/clearData";
+
 
 const Form = () => {
-  const [isSubmit, setIsSubmit] = useState(false);
+  const { isSubmit, toggleSubmit } = useContext(SubmitFormContext);
+  const [ formData, setFormData ] = useContext(FormContext);
 
+  const clearData = useClearData();
   const { register, handleSubmit, formState: { errors } } = useForm<FormTypes>();
-  const onSubmit: SubmitHandler<FormTypes> = (data:FormTypes, e) => {
-    clearDatas(e)
-    setIsSubmit(true)
-  };
 
-  const { formData, setFormData } = useContext(FormContext);
+  const onSubmit: SubmitHandler<FormTypes> = (data:FormTypes, e) => {
+    clearData(e)
+    toggleSubmit
+  };
 
   const changeHandler = (name: string, value: string) => {
     const newObj = {...formData};
     newObj[name] = value;
-
+    
     setFormData(newObj);
   } 
-
-  const clearDatas = (e: any) => {
-    e.target[0].value = ''; 
-    e.target[1].value = '';  
-    e.target[2].value = '';  
-    e.target[3].value = '';  
-    e.target[4].value = '';  
-
-    setFormData({
-      name: "JANE APPLESEED",
-      cardNumber: "0000000000000000",
-      month: "00",
-      year: "00",
-      cvc: "000",
-    });
-  }
   
   return (
     <>
