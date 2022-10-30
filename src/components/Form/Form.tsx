@@ -6,7 +6,7 @@ import { FormContext } from "../../contexts/FormContext";
 import { SubmitFormContext } from '../../contexts/SubmitFormContext';
 import validationIcon from "../../images/icon-complete.svg";
 import useClearData from "../../hooks/clearData";
-
+import Confetti from 'react-confetti';
 
 const Form = () => {
   const { isSubmit, toggleSubmit } = useContext(SubmitFormContext);
@@ -30,6 +30,8 @@ const Form = () => {
   
   return (
     <>
+      {isSubmit && <Confetti />}
+
       <form className={!isSubmit ? styles.form__content : styles.none} onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">CARDHOLDER NAME</label>
         <input placeholder="e.g. Jane Appleseed" id="name"
