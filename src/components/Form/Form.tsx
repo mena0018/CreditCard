@@ -13,11 +13,12 @@ const Form = () => {
   const [ formData, setFormData ] = useContext(FormContext);
 
   const clearData = useClearData();
-  const { register, handleSubmit, formState: { errors } } = useForm<FormTypes>();
+  const handleClick = () => toggleSubmit && toggleSubmit();
 
+  const { register, handleSubmit, formState: { errors } } = useForm<FormTypes>();
   const onSubmit: SubmitHandler<FormTypes> = (data:FormTypes, e) => {
     clearData(e)
-    toggleSubmit
+    handleClick()
   };
 
   const changeHandler = (name: string, value: string) => {
@@ -30,7 +31,6 @@ const Form = () => {
   return (
     <>
       <form className={!isSubmit ? styles.form__content : styles.none} onSubmit={handleSubmit(onSubmit)}>
-
         <label htmlFor="name">CARDHOLDER NAME</label>
         <input placeholder="e.g. Jane Appleseed" id="name"
           {...register("name", {
@@ -99,7 +99,7 @@ const Form = () => {
         <h1>Thank you!</h1>
         <p>We've added your card details</p>
 
-        <button onClick={() => setIsSubmit(false)}>Continue</button>
+        <button onClick={handleClick}>Continue</button>
       </div>
     </>
   );
