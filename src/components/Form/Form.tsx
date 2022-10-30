@@ -1,48 +1,38 @@
 import styles from "./Form.module.scss";
+import { useContext } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormTypes } from "../../types/FormTypes";
-import { useContext, useState } from 'react';
-import { FormContext } from "../../contexts/formContext";
+import { FormContext } from "../../contexts/FormContext";
+import { SubmitFormContext } from '../../contexts/SubmitFormContext';
 import validationIcon from "../../images/icon-complete.svg";
+import useClearData from "../../hooks/clearData";
+import Confetti from 'react-confetti';
 
 const Form = () => {
-  const [isSubmit, setIsSubmit] = useState(false);
+  const { isSubmit, toggleSubmit } = useContext(SubmitFormContext);
+  const [ formData, setFormData ] = useContext(FormContext);
+
+  const clearData = useClearData();
+  const handleClick = () => toggleSubmit && toggleSubmit();
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormTypes>();
   const onSubmit: SubmitHandler<FormTypes> = (data:FormTypes, e) => {
-    clearDatas(e)
-    setIsSubmit(true)
+    clearData(e)
+    handleClick()
   };
-
-  const { formData, setFormData } = useContext(FormContext);
 
   const changeHandler = (name: string, value: string) => {
     const newObj = {...formData};
     newObj[name] = value;
-
+    
     setFormData(newObj);
   } 
-
-  const clearDatas = (e: any) => {
-    e.target[0].value = ''; 
-    e.target[1].value = '';  
-    e.target[2].value = '';  
-    e.target[3].value = '';  
-    e.target[4].value = '';  
-
-    setFormData({
-      name: "JANE APPLESEED",
-      cardNumber: "0000000000000000",
-      month: "00",
-      year: "00",
-      cvc: "000",
-    });
-  }
   
   return (
     <>
-      <form className={!isSubmit ? styles.form__content : styles.none} onSubmit={handleSubmit(onSubmit)}>
+      {isSubmit && <Confetti />}
 
+      <form className={!isSubmit ? styles.form__content : styles.none} onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">CARDHOLDER NAME</label>
         <input placeholder="e.g. Jane Appleseed" id="name"
           {...register("name", {
@@ -111,7 +101,7 @@ const Form = () => {
         <h1>Thank you!</h1>
         <p>We've added your card details</p>
 
-        <button onClick={() => setIsSubmit(false)}>Continue</button>
+        <button onClick={handleClick}>Continue</button>
       </div>
     </>
   );
