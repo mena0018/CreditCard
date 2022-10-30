@@ -10,7 +10,7 @@ const CreditCard = () => {
   const frontCardRef = useRef<HTMLDivElement>(null);
   const backCardRef = useRef<HTMLDivElement>(null);
 
-  const size = useResize();
+  const { width } = useResize();
   const [formData] = useContext(FormContext);
 
   let cardNumber = formData.cardNumber.replace(/(.{4})(?=.)/g,"$1 ").split(" ")
@@ -18,7 +18,7 @@ const CreditCard = () => {
 
   useEffect(() => {
 
-    if (size > 500) {
+    if (width > 500) {
       gsap.fromTo(frontCardRef.current,
         { opacity: 0, y: -150 }, 
         { opacity: 1, y: 0, duration: 0.6 }
