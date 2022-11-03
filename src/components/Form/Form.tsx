@@ -1,24 +1,29 @@
 import styles from "./Form.module.scss";
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useForm, SubmitHandler } from "react-hook-form";
-import { FormTypes } from "../../types/FormTypes";
 import { FormContext } from "../../contexts/FormContext";
-import { SubmitFormContext } from '../../contexts/SubmitFormContext';
+import { FormProps, FormTypes } from '../../types/FormTypes';
 import validationIcon from "../../images/icon-complete.svg";
 import useClearData from "../../hooks/clearData";
-import Confetti from 'react-confetti';
 
-const Form = () => {
-  const { isSubmit, toggleSubmit } = useContext(SubmitFormContext);
+
+const Form = ({ toggleForm }: FormProps) => {
   const [ formData, setFormData ] = useContext(FormContext);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const clearData = useClearData();
-  const handleClick = () => toggleSubmit && toggleSubmit();
+
+  const handleClick = () => {
+    toggleForm(false);
+    setIsSubmit(false);
+  } 
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormTypes>();
+  
   const onSubmit: SubmitHandler<FormTypes> = (data:FormTypes, e) => {
+    toggleForm(true);
+    setIsSubmit(true);
     clearData(e)
-    handleClick()
   };
 
   const changeHandler = (name: string, value: string) => {
@@ -30,8 +35,6 @@ const Form = () => {
   
   return (
     <>
-      {isSubmit && <Confetti />}
-
       <form className={!isSubmit ? styles.form__content : styles.none} onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="name">CARDHOLDER NAME</label>
         <input placeholder="e.g. Jane Appleseed" id="name"

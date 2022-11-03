@@ -14,7 +14,6 @@ export const defaultState: FormTypes = {
   cvc: "000",
 }
 
-export type SubmitFormTypes = {
-  isSubmit: boolean;
-  toggleSubmit?: () => void;
+export type FormProps = {
+  toggleForm: (value: boolean) => void;
 }

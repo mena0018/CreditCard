@@ -1,13 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from 'react';
 import gsap from "gsap";
 import Form from "./components/Form/Form";
 import CreditCard from "./components/CreditCards/CreditCard";
 import FormContextProvider from "./contexts/FormContext";
-import SubmitFormContextProvider from "./contexts/SubmitFormContext";
+import Confetti from 'react-confetti';
 
 
 const App = () => {
   const formRef = useRef<HTMLDivElement>(null);
+
+  const [isSubmit, setIsSubmit] = useState(false);
+  const toggleForm = (value: boolean) => setIsSubmit(value);
 
   useEffect(() => {
     gsap.fromTo(
@@ -19,7 +22,8 @@ const App = () => {
 
   return (
     <FormContextProvider>
-      <SubmitFormContextProvider>
+      {isSubmit && <Confetti />}
+
         <div className="container">
           <div className="card__container">
             <div className="card__background">
@@ -28,10 +32,10 @@ const App = () => {
           </div>
 
           <div className="form__container" ref={formRef}>
-            <Form />
+            <Form toggleForm={toggleForm} />
           </div>
         </div>
-      </SubmitFormContextProvider>
+        
     </FormContextProvider>
   );
 };
