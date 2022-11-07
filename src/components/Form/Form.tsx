@@ -39,21 +39,26 @@ const Form = ({ toggleForm }: FormProps) => {
         <label htmlFor="name">CARDHOLDER NAME</label>
         <input placeholder="e.g. Jane Appleseed" id="name"
           {...register("name", {
-            required: true,
+            required: "Name is required.",
+            pattern: {
+              value: /^[a-zA-Z]+$/,
+              message: "Wrong format, letters only.."
+            },
             onChange: (e) => changeHandler("name", e.target.value),
           })} />
-        <p>{errors.name ? "Wrong format, letters only": ""}</p>
+        <p>{errors.name && errors.name.message}</p>
 
         <label htmlFor="number">CARD NUMBER</label>
         <input id="number" placeholder="e.g. 1234 5678 9123 0000"
           {...register("cardNumber", {
+            required: "Card number is required.", 
+            minLength: {value: 16, message: "The card number must have 16 characters.."},
+            maxLength: {value: 16, message: "The card number must have 16 characters.."},
             onChange: (e) => changeHandler("cardNumber", e.target.value),
-            required: true, 
-            minLength: 16,
-            maxLength: 16
           }
           )}/>
-        <p>{errors.cardNumber ? "The card number must have 16 characters": ""}</p>
+        <p>{errors.cardNumber && errors.cardNumber.message}</p>
+
 
         <div className={styles.footer}>
           <div className={styles.date__expire}>
