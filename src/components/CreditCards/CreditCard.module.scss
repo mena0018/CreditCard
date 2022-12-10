@@ -5,7 +5,7 @@
   width: 90%;
   height: 90%;
   position: absolute;
-  top: 5%;
+  top: 3%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -95,10 +95,7 @@
 
 @media screen and (min-width: 380px) {
   .wrapper {
-    top: 10%;
-
     .front_card_container {
-      top: 35%;
       width: 19em;
 
       .card_middle  {
@@ -133,6 +130,7 @@
       left: 15%;
       font-size: 1.1em;
       justify-content: space-around;
+      top: 35%;
 
       .card_header {
         padding: 1em 1.5em;
