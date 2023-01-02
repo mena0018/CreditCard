@@ -53,17 +53,20 @@ const Form = ({ toggleForm }: FormProps) => {
         <input
           placeholder="e.g. Jane Appleseed"
           id="name"
+          pattern="[a-zA-Z]+"
+          title="Can only handle names with characters"
           onInput={(e) => handleLength(e, 20)}
           {...register("name", {
             required: true,
             onChange: (e) => changeHandler("name", e.target.value),
           })}
         />
-        <p>{errors.name ? "Wrong format, letters only" : ""}</p>
+        <p>{errors.name ? "The name must be filled in" : ""}</p>
 
         <label htmlFor="number">CARD NUMBER</label>
         <input
           id="number"
+          type="number"
           placeholder="e.g. 1234 5678 9123 0000"
           onInput={(e) => handleLength(e, 16)}
           {...register("cardNumber", {
@@ -84,6 +87,7 @@ const Form = ({ toggleForm }: FormProps) => {
             <div className={styles.input_container}>
               <input
                 id="expiration-date"
+                type="number"
                 placeholder="MM"
                 onInput={(e) => handleLength(e, 2)}
                 {...register("month", {
@@ -96,6 +100,7 @@ const Form = ({ toggleForm }: FormProps) => {
 
               <input
                 placeholder="YY"
+                type="number"
                 onInput={(e) => handleLength(e, 2)}
                 {...register("year", {
                   required: true,
